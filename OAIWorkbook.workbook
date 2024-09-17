@@ -154,117 +154,2296 @@
       "content": {
         "version": "NotebookGroup/1.0",
         "groupType": "editable",
-        "title": "Monitor",
+        "items": []
+      },
+      "name": "group - 5"
+    },
+    {
+      "type": 12,
+      "content": {
+        "version": "NotebookGroup/1.0",
+        "groupType": "editable",
         "items": [
           {
-            "type": 3,
+            "type": 11,
             "content": {
-              "version": "KqlItem/1.0",
-              "query": "resources\r\n| where type == \"microsoft.cognitiveservices/accounts\"\r\n| where name in~ (split(\"{Resources:label}\", \", \"))\r\n| summarize count(type) by subscriptionId",
-              "size": 3,
-              "title": "Count by Subscription Id",
-              "queryType": 1,
-              "resourceType": "microsoft.resourcegraph/resources",
-              "crossComponentResources": [
-                "{Resources}"
-              ],
-              "visualization": "barchart"
+              "version": "LinkItem/1.0",
+              "style": "tabs",
+              "links": [
+                {
+                  "id": "ba4d84ad-9add-4c54-b570-e7285e6693f2",
+                  "cellValue": "selectedTab",
+                  "linkTarget": "parameter",
+                  "linkLabel": "Overview",
+                  "subTarget": "Overview",
+                  "style": "link"
+                },
+                {
+                  "id": "d302564e-a960-41a6-8b6e-0e9a2ac62b54",
+                  "cellValue": "selectedTab",
+                  "linkTarget": "parameter",
+                  "linkLabel": "Monitor",
+                  "subTarget": "Monitor",
+                  "style": "link"
+                }
+              ]
             },
-            "customWidth": "50",
-            "name": "query - 0"
+            "name": "tabs"
           },
           {
-            "type": 3,
+            "type": 12,
             "content": {
-              "version": "KqlItem/1.0",
-              "query": "resources\r\n| where type == \"microsoft.cognitiveservices/accounts\"\r\n| where name in~ (split(\"{Resources:label}\", \", \"))\r\n| summarize count(type) by resourceGroup",
-              "size": 3,
-              "title": "Count by Resource Group",
-              "queryType": 1,
-              "resourceType": "microsoft.resourcegraph/resources",
-              "crossComponentResources": [
-                "{Resources}"
-              ],
-              "visualization": "barchart"
+              "version": "NotebookGroup/1.0",
+              "groupType": "editable",
+              "items": [
+                {
+                  "type": 3,
+                  "content": {
+                    "version": "KqlItem/1.0",
+                    "query": "resources\r\n| where type == \"microsoft.cognitiveservices/accounts\"\r\n| where name in~ (split(\"{Resources:label}\", \", \"))\r\n| summarize count(type) by subscriptionId",
+                    "size": 3,
+                    "title": "Count by Subscription Id",
+                    "queryType": 1,
+                    "resourceType": "microsoft.resourcegraph/resources",
+                    "crossComponentResources": [
+                      "{Resources}"
+                    ],
+                    "visualization": "barchart"
+                  },
+                  "customWidth": "50",
+                  "name": "query - 0"
+                },
+                {
+                  "type": 3,
+                  "content": {
+                    "version": "KqlItem/1.0",
+                    "query": "resources\r\n| where type == \"microsoft.cognitiveservices/accounts\"\r\n| where name in~ (split(\"{Resources:label}\", \", \"))\r\n| summarize count(type) by resourceGroup",
+                    "size": 3,
+                    "title": "Count by Resource Group",
+                    "queryType": 1,
+                    "resourceType": "microsoft.resourcegraph/resources",
+                    "crossComponentResources": [
+                      "{Resources}"
+                    ],
+                    "visualization": "barchart"
+                  },
+                  "customWidth": "50",
+                  "name": "query - Count by Resource Group"
+                },
+                {
+                  "type": 3,
+                  "content": {
+                    "version": "KqlItem/1.0",
+                    "query": "resources\r\n| where type == \"microsoft.cognitiveservices/accounts\"\r\n| where name in~ (split(\"{Resources:label}\", \", \"))\r\n| summarize count(type) by location",
+                    "size": 3,
+                    "title": "Count by Location",
+                    "queryType": 1,
+                    "resourceType": "microsoft.resourcegraph/resources",
+                    "crossComponentResources": [
+                      "{Resources}"
+                    ],
+                    "visualization": "barchart"
+                  },
+                  "customWidth": "50",
+                  "name": "query - Count by Location"
+                },
+                {
+                  "type": 3,
+                  "content": {
+                    "version": "KqlItem/1.0",
+                    "query": "AzureDiagnostics\r\n| where ResourceProvider == \"MICROSOFT.COGNITIVESERVICES\"\r\n|summarize count() by bin(TimeGenerated, {TimeRange:grain} ), Resource",
+                    "size": 3,
+                    "title": "Azure Open AI Activity Timeline",
+                    "queryType": 0,
+                    "resourceType": "microsoft.operationalinsights/workspaces",
+                    "crossComponentResources": [
+                      "/subscriptions/1745f8e8-247e-42b2-9ad2-ce6709bd5b7b/resourceGroups/AzureOpenAI/providers/Microsoft.OperationalInsights/workspaces/OpenAILogAnalytics"
+                    ],
+                    "visualization": "timechart"
+                  },
+                  "name": "query - Azure Open AI Activity Timeline"
+                },
+                {
+                  "type": 3,
+                  "content": {
+                    "version": "KqlItem/1.0",
+                    "query": "resources\r\n| where type == \"microsoft.cognitiveservices/accounts\"\r\n| where name in~ (split(\"{Resources:label}\", \", \"))\r\n| extend Details = pack_all()\r\n| project Resource=id, resourceGroup, location, subscriptionId, kind, SKU=sku.name, publicNetworkAccess=properties.publicNetworkAccess, privateEndpointConnections=properties.privateEndpointConnections, dateCreated=properties.dateCreated, tags, Details",
+                    "size": 3,
+                    "title": "Azure OpenAI Resources",
+                    "showExportToExcel": true,
+                    "exportToExcelOptions": "all",
+                    "queryType": 1,
+                    "resourceType": "microsoft.resourcegraph/resources",
+                    "crossComponentResources": [
+                      "{Resources}"
+                    ],
+                    "gridSettings": {
+                      "rowLimit": 25,
+                      "filter": true
+                    }
+                  },
+                  "name": "query - Azure OpenAI Resources"
+                },
+                {
+                  "type": 10,
+                  "content": {
+                    "chartId": "workbook77b10cc9-e584-4b4a-ba46-6407e369f5ab",
+                    "version": "MetricsItem/2.0",
+                    "size": 0,
+                    "chartType": 2,
+                    "resourceType": "microsoft.cognitiveservices/accounts",
+                    "metricScope": 0,
+                    "resourceParameter": "Resources",
+                    "resourceIds": [
+                      "{Resources}"
+                    ],
+                    "timeContext": {
+                      "durationMs": 3600000
+                    },
+                    "metrics": [
+                      {
+                        "namespace": "microsoft.cognitiveservices/accounts",
+                        "metric": "microsoft.cognitiveservices/accounts-Azure OpenAI  Usage-AzureOpenAIProvisionedManagedUtilizationV2",
+                        "aggregation": 4,
+                        "columnName": "Provisioned-managed Utilization (V2)"
+                      }
+                    ],
+                    "title": "PTU Utilization",
+                    "showOpenInMe": true,
+                    "showCreateAlertRule": true,
+                    "gridSettings": {
+                      "rowLimit": 10000
+                    }
+                  },
+                  "customWidth": "50",
+                  "name": "PTU Utilization"
+                }
+              ]
             },
-            "customWidth": "50",
-            "name": "query - Count by Resource Group"
+            "conditionalVisibility": {
+              "parameterName": "selectedTab",
+              "comparison": "isEqualTo",
+              "value": "Overview"
+            },
+            "name": "Overview"
           },
           {
-            "type": 3,
+            "type": 12,
             "content": {
-              "version": "KqlItem/1.0",
-              "query": "resources\r\n| where type == \"microsoft.cognitiveservices/accounts\"\r\n| where name in~ (split(\"{Resources:label}\", \", \"))\r\n| summarize count(type) by location",
-              "size": 3,
-              "title": "Count by Location",
-              "queryType": 1,
-              "resourceType": "microsoft.resourcegraph/resources",
-              "crossComponentResources": [
-                "{Resources}"
-              ],
-              "visualization": "barchart"
+              "version": "NotebookGroup/1.0",
+              "groupType": "editable",
+              "items": [
+                {
+                  "type": 11,
+                  "content": {
+                    "version": "LinkItem/1.0",
+                    "style": "tabs",
+                    "links": [
+                      {
+                        "id": "b2a47b9d-1023-418a-8ffc-67a693c0d5a6",
+                        "cellValue": "monitorTab",
+                        "linkTarget": "parameter",
+                        "linkLabel": "HTTP Requests",
+                        "subTarget": "monitor-HTTPRequests",
+                        "style": "link",
+                        "linkIsContextBlade": true
+                      },
+                      {
+                        "id": "08ce5f59-a9bd-4a43-93c6-1c6221ec734f",
+                        "cellValue": "monitorTab",
+                        "linkTarget": "parameter",
+                        "linkLabel": "Token-Based Usage",
+                        "subTarget": "monitor-TokenBasedUsage",
+                        "style": "link"
+                      },
+                      {
+                        "id": "66b996b0-d586-40d7-9097-c707ff68a6da",
+                        "cellValue": "monitorTab",
+                        "linkTarget": "parameter",
+                        "linkLabel": "PTU Utilization",
+                        "subTarget": "monitor-PTUUtilization",
+                        "style": "link"
+                      },
+                      {
+                        "id": "6fcbb7f1-d77e-4efb-9f3f-d520801aa8f6",
+                        "cellValue": "monitorTab",
+                        "linkTarget": "parameter",
+                        "linkLabel": "Fine-tuning",
+                        "subTarget": "monitor-Finetuning",
+                        "style": "link"
+                      }
+                    ]
+                  },
+                  "name": "links - Monitor Tabs"
+                },
+                {
+                  "type": 12,
+                  "content": {
+                    "version": "NotebookGroup/1.0",
+                    "groupType": "editable",
+                    "items": [
+                      {
+                        "type": 1,
+                        "content": {
+                          "json": "#### Metrics Description\r\n- **Azure OpenAI Requests**: Number of calls made to the Azure OpenAI API over a period of time. (Applies to PTU, PTU-Managed and Pay-as-you-go deployments)\r\n- **Time to Response**: Recommended latency (responsiveness) measure for streaming requests. Calculated as time taken for the first response to appear after a user sends a prompt, as measured by the API gateway. This number increases as the prompt size increases and/or cache hit size reduces. (Applies to PTU and PTU-managed deployments)\r\n- **Prompt Token Cache Match Rate**: Percentage of the prompt tokens hit the cache,. (Applies to PTU-managed)",
+                          "style": "upsell"
+                        },
+                        "name": "title - HTTP-Requests - Metric Description"
+                      },
+                      {
+                        "type": 10,
+                        "content": {
+                          "chartId": "workbook44a06433-82ec-44c1-8731-83e8a22cd995",
+                          "version": "MetricsItem/2.0",
+                          "size": 0,
+                          "chartType": 2,
+                          "resourceType": "microsoft.cognitiveservices/accounts",
+                          "metricScope": 0,
+                          "resourceParameter": "Resources",
+                          "resourceIds": [
+                            "{Resources}"
+                          ],
+                          "timeContextFromParameter": "TimeRange",
+                          "timeContext": {
+                            "durationMs": 2592000000
+                          },
+                          "metrics": [
+                            {
+                              "namespace": "microsoft.cognitiveservices/accounts",
+                              "metric": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                              "aggregation": 7,
+                              "splitBy": [
+                                "ModelName"
+                              ]
+                            }
+                          ],
+                          "title": "Requests by Model Name",
+                          "showOpenInMe": true,
+                          "showCreateAlertRule": true,
+                          "gridSettings": {
+                            "formatters": [
+                              {
+                                "columnMatch": "Subscription",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "Name",
+                                "formatter": 13,
+                                "formatOptions": {
+                                  "linkTarget": "Resource"
+                                }
+                              },
+                              {
+                                "columnMatch": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests Timeline",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                                "formatter": 1,
+                                "numberFormat": {
+                                  "unit": 0,
+                                  "options": null
+                                }
+                              }
+                            ],
+                            "rowLimit": 10000,
+                            "labelSettings": [
+                              {
+                                "columnId": "Subscription",
+                                "label": "Subscription"
+                              },
+                              {
+                                "columnId": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                                "label": "Azure OpenAI Requests (Sum)"
+                              },
+                              {
+                                "columnId": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests Timeline",
+                                "label": "Azure OpenAI Requests Timeline"
+                              }
+                            ]
+                          }
+                        },
+                        "customWidth": "50",
+                        "showPin": false,
+                        "name": "Metric - Azure OpenAI Requests by Model Name",
+                        "styleSettings": {
+                          "margin": "0 0 20px 0"
+                        }
+                      },
+                      {
+                        "type": 10,
+                        "content": {
+                          "chartId": "workbook44a06433-82ec-44c1-8731-83e8a22cd995",
+                          "version": "MetricsItem/2.0",
+                          "size": 0,
+                          "chartType": 1,
+                          "resourceType": "microsoft.cognitiveservices/accounts",
+                          "metricScope": 0,
+                          "resourceParameter": "Resources",
+                          "resourceIds": [
+                            "{Resources}"
+                          ],
+                          "timeContextFromParameter": "TimeRange",
+                          "timeContext": {
+                            "durationMs": 2592000000
+                          },
+                          "metrics": [
+                            {
+                              "namespace": "microsoft.cognitiveservices/accounts",
+                              "metric": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                              "aggregation": 7,
+                              "splitBy": [
+                                "ModelVersion"
+                              ]
+                            }
+                          ],
+                          "title": "Requests by Model Version",
+                          "gridFormatType": 1,
+                          "tileSettings": {
+                            "showBorder": false,
+                            "titleContent": {
+                              "columnMatch": "Name",
+                              "formatter": 13
+                            },
+                            "leftContent": {
+                              "columnMatch": "Value",
+                              "formatter": 12,
+                              "formatOptions": {
+                                "palette": "auto"
+                              },
+                              "numberFormat": {
+                                "unit": 17,
+                                "options": {
+                                  "maximumSignificantDigits": 3,
+                                  "maximumFractionDigits": 2
+                                }
+                              }
+                            }
+                          },
+                          "showOpenInMe": true,
+                          "showCreateAlertRule": true,
+                          "gridSettings": {
+                            "formatters": [
+                              {
+                                "columnMatch": "Subscription",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "Name",
+                                "formatter": 13,
+                                "formatOptions": {
+                                  "linkTarget": "Resource"
+                                }
+                              },
+                              {
+                                "columnMatch": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests Timeline",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                                "formatter": 1,
+                                "numberFormat": {
+                                  "unit": 0,
+                                  "options": null
+                                }
+                              }
+                            ],
+                            "rowLimit": 10000,
+                            "labelSettings": [
+                              {
+                                "columnId": "Subscription",
+                                "label": "Subscription"
+                              },
+                              {
+                                "columnId": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                                "label": "Azure OpenAI Requests (Sum)"
+                              },
+                              {
+                                "columnId": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests Timeline",
+                                "label": "Azure OpenAI Requests Timeline"
+                              }
+                            ]
+                          }
+                        },
+                        "customWidth": "50",
+                        "showPin": false,
+                        "name": "Metric - Azure OpenAI Requests by Model Version",
+                        "styleSettings": {
+                          "margin": "0 0 20px 0"
+                        }
+                      },
+                      {
+                        "type": 10,
+                        "content": {
+                          "chartId": "workbook44a06433-82ec-44c1-8731-83e8a22cd995",
+                          "version": "MetricsItem/2.0",
+                          "size": 0,
+                          "chartType": 1,
+                          "resourceType": "microsoft.cognitiveservices/accounts",
+                          "metricScope": 0,
+                          "resourceParameter": "Resources",
+                          "resourceIds": [
+                            "{Resources}"
+                          ],
+                          "timeContextFromParameter": "TimeRange",
+                          "timeContext": {
+                            "durationMs": 2592000000
+                          },
+                          "metrics": [
+                            {
+                              "namespace": "microsoft.cognitiveservices/accounts",
+                              "metric": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                              "aggregation": 7
+                            }
+                          ],
+                          "title": "Requests by Model Deployment ",
+                          "showOpenInMe": true,
+                          "showCreateAlertRule": true,
+                          "gridSettings": {
+                            "formatters": [
+                              {
+                                "columnMatch": "Subscription",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "Name",
+                                "formatter": 13,
+                                "formatOptions": {
+                                  "linkTarget": "Resource"
+                                }
+                              },
+                              {
+                                "columnMatch": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests Timeline",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                                "formatter": 1,
+                                "numberFormat": {
+                                  "unit": 0,
+                                  "options": null
+                                }
+                              }
+                            ],
+                            "rowLimit": 10000,
+                            "labelSettings": [
+                              {
+                                "columnId": "Subscription",
+                                "label": "Subscription"
+                              },
+                              {
+                                "columnId": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                                "label": "Azure OpenAI Requests (Sum)"
+                              },
+                              {
+                                "columnId": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests Timeline",
+                                "label": "Azure OpenAI Requests Timeline"
+                              }
+                            ]
+                          }
+                        },
+                        "customWidth": "50",
+                        "showPin": false,
+                        "name": "Metric - Requests by Model Deployment ",
+                        "styleSettings": {
+                          "margin": "0 0 20px 0"
+                        }
+                      },
+                      {
+                        "type": 10,
+                        "content": {
+                          "chartId": "workbook44a06433-82ec-44c1-8731-83e8a22cd995",
+                          "version": "MetricsItem/2.0",
+                          "size": 0,
+                          "chartType": 1,
+                          "resourceType": "microsoft.cognitiveservices/accounts",
+                          "metricScope": 0,
+                          "resourceParameter": "Resources",
+                          "resourceIds": [
+                            "{Resources}"
+                          ],
+                          "timeContextFromParameter": "TimeRange",
+                          "timeContext": {
+                            "durationMs": 2592000000
+                          },
+                          "metrics": [
+                            {
+                              "namespace": "microsoft.cognitiveservices/accounts",
+                              "metric": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                              "aggregation": 7,
+                              "splitBy": [
+                                "StatusCode"
+                              ]
+                            }
+                          ],
+                          "title": "Requests by Status Code",
+                          "showOpenInMe": true,
+                          "showCreateAlertRule": true,
+                          "gridSettings": {
+                            "formatters": [
+                              {
+                                "columnMatch": "Subscription",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "Name",
+                                "formatter": 13,
+                                "formatOptions": {
+                                  "linkTarget": "Resource"
+                                }
+                              },
+                              {
+                                "columnMatch": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests Timeline",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                                "formatter": 1,
+                                "numberFormat": {
+                                  "unit": 0,
+                                  "options": null
+                                }
+                              }
+                            ],
+                            "rowLimit": 10000,
+                            "labelSettings": [
+                              {
+                                "columnId": "Subscription",
+                                "label": "Subscription"
+                              },
+                              {
+                                "columnId": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                                "label": "Azure OpenAI Requests (Sum)"
+                              },
+                              {
+                                "columnId": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests Timeline",
+                                "label": "Azure OpenAI Requests Timeline"
+                              }
+                            ]
+                          }
+                        },
+                        "customWidth": "50",
+                        "showPin": false,
+                        "name": "Metric - Requests by Status Code",
+                        "styleSettings": {
+                          "margin": "0 0 20px 0"
+                        }
+                      },
+                      {
+                        "type": 10,
+                        "content": {
+                          "chartId": "workbook44a06433-82ec-44c1-8731-83e8a22cd995",
+                          "version": "MetricsItem/2.0",
+                          "size": 0,
+                          "chartType": 1,
+                          "resourceType": "microsoft.cognitiveservices/accounts",
+                          "metricScope": 0,
+                          "resourceParameter": "Resources",
+                          "resourceIds": [
+                            "{Resources}"
+                          ],
+                          "timeContextFromParameter": "TimeRange",
+                          "timeContext": {
+                            "durationMs": 2592000000
+                          },
+                          "metrics": [
+                            {
+                              "namespace": "microsoft.cognitiveservices/accounts",
+                              "metric": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                              "aggregation": 7,
+                              "splitBy": [
+                                "StreamType"
+                              ]
+                            }
+                          ],
+                          "title": "Requests by StreamType",
+                          "showOpenInMe": true,
+                          "showCreateAlertRule": true,
+                          "gridSettings": {
+                            "formatters": [
+                              {
+                                "columnMatch": "Subscription",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "Name",
+                                "formatter": 13,
+                                "formatOptions": {
+                                  "linkTarget": "Resource"
+                                }
+                              },
+                              {
+                                "columnMatch": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests Timeline",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                                "formatter": 1,
+                                "numberFormat": {
+                                  "unit": 0,
+                                  "options": null
+                                }
+                              }
+                            ],
+                            "rowLimit": 10000,
+                            "labelSettings": [
+                              {
+                                "columnId": "Subscription",
+                                "label": "Subscription"
+                              },
+                              {
+                                "columnId": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                                "label": "Azure OpenAI Requests (Sum)"
+                              },
+                              {
+                                "columnId": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests Timeline",
+                                "label": "Azure OpenAI Requests Timeline"
+                              }
+                            ]
+                          }
+                        },
+                        "customWidth": "50",
+                        "showPin": false,
+                        "name": "Metric - Azure OpenAI Requests by StreamType",
+                        "styleSettings": {
+                          "margin": "0 0 20px 0"
+                        }
+                      },
+                      {
+                        "type": 10,
+                        "content": {
+                          "chartId": "workbook44a06433-82ec-44c1-8731-83e8a22cd995",
+                          "version": "MetricsItem/2.0",
+                          "size": 0,
+                          "chartType": 1,
+                          "resourceType": "microsoft.cognitiveservices/accounts",
+                          "metricScope": 0,
+                          "resourceParameter": "Resources",
+                          "resourceIds": [
+                            "{Resources}"
+                          ],
+                          "timeContextFromParameter": "TimeRange",
+                          "timeContext": {
+                            "durationMs": 2592000000
+                          },
+                          "metrics": [
+                            {
+                              "namespace": "microsoft.cognitiveservices/accounts",
+                              "metric": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                              "aggregation": 7
+                            }
+                          ],
+                          "title": "Requests by Operation ",
+                          "showOpenInMe": true,
+                          "showCreateAlertRule": true,
+                          "gridSettings": {
+                            "formatters": [
+                              {
+                                "columnMatch": "Subscription",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "Name",
+                                "formatter": 13,
+                                "formatOptions": {
+                                  "linkTarget": "Resource"
+                                }
+                              },
+                              {
+                                "columnMatch": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests Timeline",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                                "formatter": 1,
+                                "numberFormat": {
+                                  "unit": 0,
+                                  "options": null
+                                }
+                              }
+                            ],
+                            "rowLimit": 10000,
+                            "labelSettings": [
+                              {
+                                "columnId": "Subscription",
+                                "label": "Subscription"
+                              },
+                              {
+                                "columnId": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                                "label": "Azure OpenAI Requests (Sum)"
+                              },
+                              {
+                                "columnId": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests Timeline",
+                                "label": "Azure OpenAI Requests Timeline"
+                              }
+                            ]
+                          }
+                        },
+                        "customWidth": "50",
+                        "showPin": false,
+                        "name": "Metric - Azure OpenAI Requests by Operation ",
+                        "styleSettings": {
+                          "margin": "0 0 20px 0"
+                        }
+                      },
+                      {
+                        "type": 10,
+                        "content": {
+                          "chartId": "workbook44a06433-82ec-44c1-8731-83e8a22cd995",
+                          "version": "MetricsItem/2.0",
+                          "size": 0,
+                          "chartType": 1,
+                          "resourceType": "microsoft.cognitiveservices/accounts",
+                          "metricScope": 0,
+                          "resourceParameter": "Resources",
+                          "resourceIds": [
+                            "{Resources}"
+                          ],
+                          "timeContextFromParameter": "TimeRange",
+                          "timeContext": {
+                            "durationMs": 2592000000
+                          },
+                          "metrics": [
+                            {
+                              "namespace": "microsoft.cognitiveservices/accounts",
+                              "metric": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAITimeToResponse",
+                              "aggregation": 4,
+                              "splitBy": [
+                                "ModelName"
+                              ]
+                            }
+                          ],
+                          "title": "Time to Response by Model Name",
+                          "showOpenInMe": true,
+                          "showCreateAlertRule": true,
+                          "gridSettings": {
+                            "formatters": [
+                              {
+                                "columnMatch": "Subscription",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "Name",
+                                "formatter": 13,
+                                "formatOptions": {
+                                  "linkTarget": "Resource"
+                                }
+                              },
+                              {
+                                "columnMatch": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests Timeline",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                                "formatter": 1,
+                                "numberFormat": {
+                                  "unit": 0,
+                                  "options": null
+                                }
+                              }
+                            ],
+                            "rowLimit": 10000,
+                            "labelSettings": [
+                              {
+                                "columnId": "Subscription",
+                                "label": "Subscription"
+                              },
+                              {
+                                "columnId": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                                "label": "Azure OpenAI Requests (Sum)"
+                              },
+                              {
+                                "columnId": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests Timeline",
+                                "label": "Azure OpenAI Requests Timeline"
+                              }
+                            ]
+                          }
+                        },
+                        "customWidth": "50",
+                        "showPin": false,
+                        "name": "Metric - Azure OpenAI Time to Response by Model Name",
+                        "styleSettings": {
+                          "margin": "0 0 20px 0"
+                        }
+                      },
+                      {
+                        "type": 10,
+                        "content": {
+                          "chartId": "workbook44a06433-82ec-44c1-8731-83e8a22cd995",
+                          "version": "MetricsItem/2.0",
+                          "size": 0,
+                          "chartType": 1,
+                          "resourceType": "microsoft.cognitiveservices/accounts",
+                          "metricScope": 0,
+                          "resourceParameter": "Resources",
+                          "resourceIds": [
+                            "{Resources}"
+                          ],
+                          "timeContextFromParameter": "TimeRange",
+                          "timeContext": {
+                            "durationMs": 2592000000
+                          },
+                          "metrics": [
+                            {
+                              "namespace": "microsoft.cognitiveservices/accounts",
+                              "metric": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAITimeToResponse",
+                              "aggregation": 4,
+                              "splitBy": [
+                                "ModelDeploymentName"
+                              ]
+                            }
+                          ],
+                          "title": "Time to Response by Model Deployment Name",
+                          "showOpenInMe": true,
+                          "showCreateAlertRule": true,
+                          "gridSettings": {
+                            "formatters": [
+                              {
+                                "columnMatch": "Subscription",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "Name",
+                                "formatter": 13,
+                                "formatOptions": {
+                                  "linkTarget": "Resource"
+                                }
+                              },
+                              {
+                                "columnMatch": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests Timeline",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                                "formatter": 1,
+                                "numberFormat": {
+                                  "unit": 0,
+                                  "options": null
+                                }
+                              }
+                            ],
+                            "rowLimit": 10000,
+                            "labelSettings": [
+                              {
+                                "columnId": "Subscription",
+                                "label": "Subscription"
+                              },
+                              {
+                                "columnId": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                                "label": "Azure OpenAI Requests (Sum)"
+                              },
+                              {
+                                "columnId": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests Timeline",
+                                "label": "Azure OpenAI Requests Timeline"
+                              }
+                            ]
+                          }
+                        },
+                        "customWidth": "50",
+                        "showPin": false,
+                        "name": "Metric - Azure OpenAI Time to Response by Model Deployment Name",
+                        "styleSettings": {
+                          "margin": "0 0 20px 0"
+                        }
+                      },
+                      {
+                        "type": 10,
+                        "content": {
+                          "chartId": "workbook44a06433-82ec-44c1-8731-83e8a22cd995",
+                          "version": "MetricsItem/2.0",
+                          "size": 0,
+                          "chartType": 1,
+                          "resourceType": "microsoft.cognitiveservices/accounts",
+                          "metricScope": 0,
+                          "resourceParameter": "Resources",
+                          "resourceIds": [
+                            "{Resources}"
+                          ],
+                          "timeContextFromParameter": "TimeRange",
+                          "timeContext": {
+                            "durationMs": 2592000000
+                          },
+                          "metrics": [
+                            {
+                              "namespace": "microsoft.cognitiveservices/accounts",
+                              "metric": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIContextTokensCacheMatchRate",
+                              "aggregation": 4,
+                              "splitBy": [
+                                "ModelName"
+                              ]
+                            }
+                          ],
+                          "title": "Prompt Token Cache Match Rate by Model Name",
+                          "showOpenInMe": true,
+                          "showCreateAlertRule": true,
+                          "gridSettings": {
+                            "formatters": [
+                              {
+                                "columnMatch": "Subscription",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "Name",
+                                "formatter": 13,
+                                "formatOptions": {
+                                  "linkTarget": "Resource"
+                                }
+                              },
+                              {
+                                "columnMatch": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests Timeline",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                                "formatter": 1,
+                                "numberFormat": {
+                                  "unit": 0,
+                                  "options": null
+                                }
+                              }
+                            ],
+                            "rowLimit": 10000,
+                            "labelSettings": [
+                              {
+                                "columnId": "Subscription",
+                                "label": "Subscription"
+                              },
+                              {
+                                "columnId": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                                "label": "Azure OpenAI Requests (Sum)"
+                              },
+                              {
+                                "columnId": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests Timeline",
+                                "label": "Azure OpenAI Requests Timeline"
+                              }
+                            ]
+                          }
+                        },
+                        "customWidth": "50",
+                        "showPin": false,
+                        "name": "Metric - Azure OpenAI Prompt Token Cache Match Rate by Model Name",
+                        "styleSettings": {
+                          "margin": "0 0 20px 0"
+                        }
+                      },
+                      {
+                        "type": 10,
+                        "content": {
+                          "chartId": "workbook44a06433-82ec-44c1-8731-83e8a22cd995",
+                          "version": "MetricsItem/2.0",
+                          "size": 0,
+                          "chartType": 1,
+                          "resourceType": "microsoft.cognitiveservices/accounts",
+                          "metricScope": 0,
+                          "resourceParameter": "Resources",
+                          "resourceIds": [
+                            "{Resources}"
+                          ],
+                          "timeContextFromParameter": "TimeRange",
+                          "timeContext": {
+                            "durationMs": 2592000000
+                          },
+                          "metrics": [
+                            {
+                              "namespace": "microsoft.cognitiveservices/accounts",
+                              "metric": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIContextTokensCacheMatchRate",
+                              "aggregation": 4,
+                              "splitBy": [
+                                "ModelDeploymentName"
+                              ]
+                            }
+                          ],
+                          "title": "Prompt Token Cache Match Rate by Model Deployment Name ",
+                          "showOpenInMe": true,
+                          "showCreateAlertRule": true,
+                          "gridSettings": {
+                            "formatters": [
+                              {
+                                "columnMatch": "Subscription",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "Name",
+                                "formatter": 13,
+                                "formatOptions": {
+                                  "linkTarget": "Resource"
+                                }
+                              },
+                              {
+                                "columnMatch": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests Timeline",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                                "formatter": 1,
+                                "numberFormat": {
+                                  "unit": 0,
+                                  "options": null
+                                }
+                              }
+                            ],
+                            "rowLimit": 10000,
+                            "labelSettings": [
+                              {
+                                "columnId": "Subscription",
+                                "label": "Subscription"
+                              },
+                              {
+                                "columnId": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                                "label": "Azure OpenAI Requests (Sum)"
+                              },
+                              {
+                                "columnId": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests Timeline",
+                                "label": "Azure OpenAI Requests Timeline"
+                              }
+                            ]
+                          }
+                        },
+                        "customWidth": "50",
+                        "showPin": false,
+                        "name": "Metric - Azure OpenAI Prompt Token Cache Match Rate by Model Deployment Name ",
+                        "styleSettings": {
+                          "margin": "0 0 20px 0"
+                        }
+                      }
+                    ]
+                  },
+                  "conditionalVisibility": {
+                    "parameterName": "monitorTab",
+                    "comparison": "isEqualTo",
+                    "value": "monitor-HTTPRequests"
+                  },
+                  "name": "group - Monitor - HTTP Requests"
+                },
+                {
+                  "type": 12,
+                  "content": {
+                    "version": "NotebookGroup/1.0",
+                    "groupType": "editable",
+                    "items": [
+                      {
+                        "type": 1,
+                        "content": {
+                          "json": "### Metrics Definitions  \r\n  \r\n1. **Active tokens**: Total tokens minus cached tokens over a period of time. Applies to PTU and PTU-managed deployments. Use this metric to understand your TPS or TPM based utilization for PTUs and compare to your benchmarks for target TPS or TPM for your scenarios.  \r\n  \r\n2. **Generated Completions Tokens**: Number of tokens generated (output) from an OpenAI model. Applies to PTU, PTU-Managed and Pay-as-you-go deployments.  \r\n  \r\n3. **Processed Inference Tokens**: Number of inference tokens processed on an OpenAI model. Calculated as prompt tokens (input) plus generated tokens (output). Applies to PTU, PTU-Managed and Pay-as-you-go deployments.  \r\n  \r\n4. **Processed Prompt Tokens**: Number of prompt tokens processed (input) on an OpenAI model. Applies to PTU, PTU-Managed and Pay-as-you-go deployments. ",
+                          "style": "upsell"
+                        },
+                        "name": "text - 6"
+                      },
+                      {
+                        "type": 10,
+                        "content": {
+                          "chartId": "workbook44a06433-82ec-44c1-8731-83e8a22cd995",
+                          "version": "MetricsItem/2.0",
+                          "size": 0,
+                          "chartType": 1,
+                          "resourceType": "microsoft.cognitiveservices/accounts",
+                          "metricScope": 0,
+                          "resourceParameter": "Resources",
+                          "resourceIds": [
+                            "{Resources}"
+                          ],
+                          "timeContextFromParameter": "TimeRange",
+                          "timeContext": {
+                            "durationMs": 2592000000
+                          },
+                          "metrics": [
+                            {
+                              "namespace": "microsoft.cognitiveservices/accounts",
+                              "metric": "microsoft.cognitiveservices/accounts-Azure OpenAI  Usage-ActiveTokens",
+                              "aggregation": 1,
+                              "splitBy": [
+                                "ModelName"
+                              ]
+                            }
+                          ],
+                          "title": "Active Tokens by Model Name",
+                          "showOpenInMe": true,
+                          "showCreateAlertRule": true,
+                          "gridSettings": {
+                            "formatters": [
+                              {
+                                "columnMatch": "Subscription",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "Name",
+                                "formatter": 13,
+                                "formatOptions": {
+                                  "linkTarget": "Resource"
+                                }
+                              },
+                              {
+                                "columnMatch": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests Timeline",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                                "formatter": 1,
+                                "numberFormat": {
+                                  "unit": 0,
+                                  "options": null
+                                }
+                              }
+                            ],
+                            "rowLimit": 10000,
+                            "labelSettings": [
+                              {
+                                "columnId": "Subscription",
+                                "label": "Subscription"
+                              },
+                              {
+                                "columnId": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                                "label": "Azure OpenAI Requests (Sum)"
+                              },
+                              {
+                                "columnId": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests Timeline",
+                                "label": "Azure OpenAI Requests Timeline"
+                              }
+                            ]
+                          }
+                        },
+                        "customWidth": "50",
+                        "showPin": false,
+                        "name": "Metric - Active Tokens by Model Name",
+                        "styleSettings": {
+                          "margin": "0 0 20px 0"
+                        }
+                      },
+                      {
+                        "type": 10,
+                        "content": {
+                          "chartId": "workbook44a06433-82ec-44c1-8731-83e8a22cd995",
+                          "version": "MetricsItem/2.0",
+                          "size": 0,
+                          "chartType": 1,
+                          "resourceType": "microsoft.cognitiveservices/accounts",
+                          "metricScope": 0,
+                          "resourceParameter": "Resources",
+                          "resourceIds": [
+                            "{Resources}"
+                          ],
+                          "timeContextFromParameter": "TimeRange",
+                          "timeContext": {
+                            "durationMs": 2592000000
+                          },
+                          "metrics": [
+                            {
+                              "namespace": "microsoft.cognitiveservices/accounts",
+                              "metric": "microsoft.cognitiveservices/accounts-Azure OpenAI  Usage-ActiveTokens",
+                              "aggregation": 1,
+                              "splitBy": [
+                                "ModelDeploymentName"
+                              ]
+                            }
+                          ],
+                          "title": "Active Tokens by Model Deployment Name",
+                          "showOpenInMe": true,
+                          "showCreateAlertRule": true,
+                          "gridSettings": {
+                            "formatters": [
+                              {
+                                "columnMatch": "Subscription",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "Name",
+                                "formatter": 13,
+                                "formatOptions": {
+                                  "linkTarget": "Resource"
+                                }
+                              },
+                              {
+                                "columnMatch": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests Timeline",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                                "formatter": 1,
+                                "numberFormat": {
+                                  "unit": 0,
+                                  "options": null
+                                }
+                              }
+                            ],
+                            "rowLimit": 10000,
+                            "labelSettings": [
+                              {
+                                "columnId": "Subscription",
+                                "label": "Subscription"
+                              },
+                              {
+                                "columnId": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                                "label": "Azure OpenAI Requests (Sum)"
+                              },
+                              {
+                                "columnId": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests Timeline",
+                                "label": "Azure OpenAI Requests Timeline"
+                              }
+                            ]
+                          }
+                        },
+                        "customWidth": "50",
+                        "showPin": false,
+                        "name": "Metric - Active Tokens by Model Deployment Name",
+                        "styleSettings": {
+                          "margin": "0 0 20px 0"
+                        }
+                      },
+                      {
+                        "type": 10,
+                        "content": {
+                          "chartId": "workbook44a06433-82ec-44c1-8731-83e8a22cd995",
+                          "version": "MetricsItem/2.0",
+                          "size": 0,
+                          "chartType": 1,
+                          "resourceType": "microsoft.cognitiveservices/accounts",
+                          "metricScope": 0,
+                          "resourceParameter": "Resources",
+                          "resourceIds": [
+                            "{Resources}"
+                          ],
+                          "timeContextFromParameter": "TimeRange",
+                          "timeContext": {
+                            "durationMs": 2592000000
+                          },
+                          "metrics": [
+                            {
+                              "namespace": "microsoft.cognitiveservices/accounts",
+                              "metric": "microsoft.cognitiveservices/accounts-Azure OpenAI  Usage-TokenTransaction",
+                              "aggregation": 1,
+                              "splitBy": [
+                                "FeatureName"
+                              ]
+                            }
+                          ],
+                          "title": "Processed Inference Tokens by Model Name",
+                          "showOpenInMe": true,
+                          "showCreateAlertRule": true,
+                          "gridSettings": {
+                            "formatters": [
+                              {
+                                "columnMatch": "Subscription",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "Name",
+                                "formatter": 13,
+                                "formatOptions": {
+                                  "linkTarget": "Resource"
+                                }
+                              },
+                              {
+                                "columnMatch": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests Timeline",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                                "formatter": 1,
+                                "numberFormat": {
+                                  "unit": 0,
+                                  "options": null
+                                }
+                              }
+                            ],
+                            "rowLimit": 10000,
+                            "labelSettings": [
+                              {
+                                "columnId": "Subscription",
+                                "label": "Subscription"
+                              },
+                              {
+                                "columnId": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                                "label": "Azure OpenAI Requests (Sum)"
+                              },
+                              {
+                                "columnId": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests Timeline",
+                                "label": "Azure OpenAI Requests Timeline"
+                              }
+                            ]
+                          }
+                        },
+                        "customWidth": "50",
+                        "showPin": false,
+                        "name": "Metric - Processed Inference Tokens by Model Name",
+                        "styleSettings": {
+                          "margin": "0 0 20px 0"
+                        }
+                      },
+                      {
+                        "type": 10,
+                        "content": {
+                          "chartId": "workbook44a06433-82ec-44c1-8731-83e8a22cd995",
+                          "version": "MetricsItem/2.0",
+                          "size": 0,
+                          "chartType": 1,
+                          "resourceType": "microsoft.cognitiveservices/accounts",
+                          "metricScope": 0,
+                          "resourceParameter": "Resources",
+                          "resourceIds": [
+                            "{Resources}"
+                          ],
+                          "timeContextFromParameter": "TimeRange",
+                          "timeContext": {
+                            "durationMs": 2592000000
+                          },
+                          "metrics": [
+                            {
+                              "namespace": "microsoft.cognitiveservices/accounts",
+                              "metric": "microsoft.cognitiveservices/accounts-Azure OpenAI  Usage-TokenTransaction",
+                              "aggregation": 1,
+                              "splitBy": [
+                                "ModelDeploymentName"
+                              ]
+                            }
+                          ],
+                          "title": "Processed Inference Tokens by Model Deployment Name",
+                          "showOpenInMe": true,
+                          "showCreateAlertRule": true,
+                          "gridSettings": {
+                            "formatters": [
+                              {
+                                "columnMatch": "Subscription",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "Name",
+                                "formatter": 13,
+                                "formatOptions": {
+                                  "linkTarget": "Resource"
+                                }
+                              },
+                              {
+                                "columnMatch": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests Timeline",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                                "formatter": 1,
+                                "numberFormat": {
+                                  "unit": 0,
+                                  "options": null
+                                }
+                              }
+                            ],
+                            "rowLimit": 10000,
+                            "labelSettings": [
+                              {
+                                "columnId": "Subscription",
+                                "label": "Subscription"
+                              },
+                              {
+                                "columnId": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                                "label": "Azure OpenAI Requests (Sum)"
+                              },
+                              {
+                                "columnId": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests Timeline",
+                                "label": "Azure OpenAI Requests Timeline"
+                              }
+                            ]
+                          }
+                        },
+                        "customWidth": "50",
+                        "showPin": false,
+                        "name": "Metric - Processed Inference Tokens by Model Deployment Name",
+                        "styleSettings": {
+                          "margin": "0 0 20px 0"
+                        }
+                      },
+                      {
+                        "type": 10,
+                        "content": {
+                          "chartId": "workbook44a06433-82ec-44c1-8731-83e8a22cd995",
+                          "version": "MetricsItem/2.0",
+                          "size": 0,
+                          "chartType": 1,
+                          "resourceType": "microsoft.cognitiveservices/accounts",
+                          "metricScope": 0,
+                          "resourceParameter": "Resources",
+                          "resourceIds": [
+                            "{Resources}"
+                          ],
+                          "timeContextFromParameter": "TimeRange",
+                          "timeContext": {
+                            "durationMs": 2592000000
+                          },
+                          "metrics": [
+                            {
+                              "namespace": "microsoft.cognitiveservices/accounts",
+                              "metric": "microsoft.cognitiveservices/accounts-Azure OpenAI  Usage-ProcessedPromptTokens",
+                              "aggregation": 1,
+                              "splitBy": [
+                                "FeatureName"
+                              ]
+                            }
+                          ],
+                          "title": "Processed Prompt Tokens by Model Name",
+                          "showOpenInMe": true,
+                          "showCreateAlertRule": true,
+                          "gridSettings": {
+                            "formatters": [
+                              {
+                                "columnMatch": "Subscription",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "Name",
+                                "formatter": 13,
+                                "formatOptions": {
+                                  "linkTarget": "Resource"
+                                }
+                              },
+                              {
+                                "columnMatch": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests Timeline",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                                "formatter": 1,
+                                "numberFormat": {
+                                  "unit": 0,
+                                  "options": null
+                                }
+                              }
+                            ],
+                            "rowLimit": 10000,
+                            "labelSettings": [
+                              {
+                                "columnId": "Subscription",
+                                "label": "Subscription"
+                              },
+                              {
+                                "columnId": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                                "label": "Azure OpenAI Requests (Sum)"
+                              },
+                              {
+                                "columnId": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests Timeline",
+                                "label": "Azure OpenAI Requests Timeline"
+                              }
+                            ]
+                          }
+                        },
+                        "customWidth": "50",
+                        "showPin": false,
+                        "name": "Metric - Processed Prompt Tokens by Model Name",
+                        "styleSettings": {
+                          "margin": "0 0 20px 0"
+                        }
+                      },
+                      {
+                        "type": 10,
+                        "content": {
+                          "chartId": "workbook44a06433-82ec-44c1-8731-83e8a22cd995",
+                          "version": "MetricsItem/2.0",
+                          "size": 0,
+                          "chartType": 1,
+                          "resourceType": "microsoft.cognitiveservices/accounts",
+                          "metricScope": 0,
+                          "resourceParameter": "Resources",
+                          "resourceIds": [
+                            "{Resources}"
+                          ],
+                          "timeContextFromParameter": "TimeRange",
+                          "timeContext": {
+                            "durationMs": 2592000000
+                          },
+                          "metrics": [
+                            {
+                              "namespace": "microsoft.cognitiveservices/accounts",
+                              "metric": "microsoft.cognitiveservices/accounts-Azure OpenAI  Usage-ProcessedPromptTokens",
+                              "aggregation": 1
+                            }
+                          ],
+                          "title": "Processed Prompt Tokens by Model Deployment Name",
+                          "showOpenInMe": true,
+                          "showCreateAlertRule": true,
+                          "gridSettings": {
+                            "formatters": [
+                              {
+                                "columnMatch": "Subscription",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "Name",
+                                "formatter": 13,
+                                "formatOptions": {
+                                  "linkTarget": "Resource"
+                                }
+                              },
+                              {
+                                "columnMatch": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests Timeline",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                                "formatter": 1,
+                                "numberFormat": {
+                                  "unit": 0,
+                                  "options": null
+                                }
+                              }
+                            ],
+                            "rowLimit": 10000,
+                            "labelSettings": [
+                              {
+                                "columnId": "Subscription",
+                                "label": "Subscription"
+                              },
+                              {
+                                "columnId": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                                "label": "Azure OpenAI Requests (Sum)"
+                              },
+                              {
+                                "columnId": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests Timeline",
+                                "label": "Azure OpenAI Requests Timeline"
+                              }
+                            ]
+                          }
+                        },
+                        "customWidth": "50",
+                        "showPin": false,
+                        "name": "Metric - Processed Prompt Tokens by Model Deployment Name",
+                        "styleSettings": {
+                          "margin": "0 0 20px 0"
+                        }
+                      },
+                      {
+                        "type": 10,
+                        "content": {
+                          "chartId": "workbook44a06433-82ec-44c1-8731-83e8a22cd995",
+                          "version": "MetricsItem/2.0",
+                          "size": 0,
+                          "chartType": 1,
+                          "resourceType": "microsoft.cognitiveservices/accounts",
+                          "metricScope": 0,
+                          "resourceParameter": "Resources",
+                          "resourceIds": [
+                            "{Resources}"
+                          ],
+                          "timeContextFromParameter": "TimeRange",
+                          "timeContext": {
+                            "durationMs": 2592000000
+                          },
+                          "metrics": [
+                            {
+                              "namespace": "microsoft.cognitiveservices/accounts",
+                              "metric": "microsoft.cognitiveservices/accounts-Azure OpenAI  Usage-GeneratedTokens",
+                              "aggregation": 1,
+                              "splitBy": [
+                                "FeatureName"
+                              ]
+                            }
+                          ],
+                          "title": "Generate Completion Tokens by Model Name",
+                          "showOpenInMe": true,
+                          "showCreateAlertRule": true,
+                          "gridSettings": {
+                            "formatters": [
+                              {
+                                "columnMatch": "Subscription",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "Name",
+                                "formatter": 13,
+                                "formatOptions": {
+                                  "linkTarget": "Resource"
+                                }
+                              },
+                              {
+                                "columnMatch": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests Timeline",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                                "formatter": 1,
+                                "numberFormat": {
+                                  "unit": 0,
+                                  "options": null
+                                }
+                              }
+                            ],
+                            "rowLimit": 10000,
+                            "labelSettings": [
+                              {
+                                "columnId": "Subscription",
+                                "label": "Subscription"
+                              },
+                              {
+                                "columnId": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                                "label": "Azure OpenAI Requests (Sum)"
+                              },
+                              {
+                                "columnId": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests Timeline",
+                                "label": "Azure OpenAI Requests Timeline"
+                              }
+                            ]
+                          }
+                        },
+                        "customWidth": "50",
+                        "showPin": false,
+                        "name": "Metric - Generate Completion Tokens by Model Name",
+                        "styleSettings": {
+                          "margin": "0 0 20px 0"
+                        }
+                      },
+                      {
+                        "type": 10,
+                        "content": {
+                          "chartId": "workbook44a06433-82ec-44c1-8731-83e8a22cd995",
+                          "version": "MetricsItem/2.0",
+                          "size": 0,
+                          "chartType": 1,
+                          "resourceType": "microsoft.cognitiveservices/accounts",
+                          "metricScope": 0,
+                          "resourceParameter": "Resources",
+                          "resourceIds": [
+                            "{Resources}"
+                          ],
+                          "timeContextFromParameter": "TimeRange",
+                          "timeContext": {
+                            "durationMs": 2592000000
+                          },
+                          "metrics": [
+                            {
+                              "namespace": "microsoft.cognitiveservices/accounts",
+                              "metric": "microsoft.cognitiveservices/accounts-Azure OpenAI  Usage-GeneratedTokens",
+                              "aggregation": 1,
+                              "splitBy": [
+                                "ModelDeploymentName"
+                              ]
+                            }
+                          ],
+                          "title": "Generate Completion Tokens by Model Deployment Name",
+                          "showOpenInMe": true,
+                          "showCreateAlertRule": true,
+                          "gridSettings": {
+                            "formatters": [
+                              {
+                                "columnMatch": "Subscription",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "Name",
+                                "formatter": 13,
+                                "formatOptions": {
+                                  "linkTarget": "Resource"
+                                }
+                              },
+                              {
+                                "columnMatch": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests Timeline",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                                "formatter": 1,
+                                "numberFormat": {
+                                  "unit": 0,
+                                  "options": null
+                                }
+                              }
+                            ],
+                            "rowLimit": 10000,
+                            "labelSettings": [
+                              {
+                                "columnId": "Subscription",
+                                "label": "Subscription"
+                              },
+                              {
+                                "columnId": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                                "label": "Azure OpenAI Requests (Sum)"
+                              },
+                              {
+                                "columnId": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests Timeline",
+                                "label": "Azure OpenAI Requests Timeline"
+                              }
+                            ]
+                          }
+                        },
+                        "customWidth": "50",
+                        "showPin": false,
+                        "name": "Metric - Generate Completion Tokens by Model Deployment Name",
+                        "styleSettings": {
+                          "margin": "0 0 20px 0"
+                        }
+                      }
+                    ]
+                  },
+                  "conditionalVisibility": {
+                    "parameterName": "monitorTab",
+                    "comparison": "isEqualTo",
+                    "value": "monitor-TokenBasedUsage"
+                  },
+                  "name": "group - Monitor - Token-Based Usage"
+                },
+                {
+                  "type": 12,
+                  "content": {
+                    "version": "NotebookGroup/1.0",
+                    "groupType": "editable",
+                    "items": [
+                      {
+                        "type": 1,
+                        "content": {
+                          "json": "## Metrics Definition  \r\n  \r\n**Provisioned-Managed Utilization**: Utilization % for a provisioned-managed deployment, calculated as (PTUs consumed / PTUs deployed) x 100. When utilization is greater than or equal to 100%, calls are throttled and error code 429 returned.  \r\n",
+                          "style": "upsell"
+                        },
+                        "name": "Monitor Title - Copy"
+                      },
+                      {
+                        "type": 10,
+                        "content": {
+                          "chartId": "workbook44a06433-82ec-44c1-8731-83e8a22cd995",
+                          "version": "MetricsItem/2.0",
+                          "size": 0,
+                          "chartType": 2,
+                          "resourceType": "microsoft.cognitiveservices/accounts",
+                          "metricScope": 0,
+                          "resourceParameter": "Resources",
+                          "resourceIds": [
+                            "{Resources}"
+                          ],
+                          "timeContextFromParameter": "TimeRange",
+                          "timeContext": {
+                            "durationMs": 2592000000
+                          },
+                          "metrics": [
+                            {
+                              "namespace": "microsoft.cognitiveservices/accounts",
+                              "metric": "microsoft.cognitiveservices/accounts-Azure OpenAI  Usage-AzureOpenAIProvisionedManagedUtilizationV2",
+                              "aggregation": 4,
+                              "splitBy": [
+                                "ModelName"
+                              ]
+                            }
+                          ],
+                          "title": "Provisioned-managed Utilization by Model Name",
+                          "showOpenInMe": true,
+                          "showCreateAlertRule": true,
+                          "gridSettings": {
+                            "formatters": [
+                              {
+                                "columnMatch": "Subscription",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "Name",
+                                "formatter": 13,
+                                "formatOptions": {
+                                  "linkTarget": "Resource"
+                                }
+                              },
+                              {
+                                "columnMatch": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests Timeline",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                                "formatter": 1,
+                                "numberFormat": {
+                                  "unit": 0,
+                                  "options": null
+                                }
+                              }
+                            ],
+                            "rowLimit": 10000,
+                            "labelSettings": [
+                              {
+                                "columnId": "Subscription",
+                                "label": "Subscription"
+                              },
+                              {
+                                "columnId": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                                "label": "Azure OpenAI Requests (Sum)"
+                              },
+                              {
+                                "columnId": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests Timeline",
+                                "label": "Azure OpenAI Requests Timeline"
+                              }
+                            ]
+                          }
+                        },
+                        "customWidth": "50",
+                        "showPin": false,
+                        "name": "Metric - Provisioned-managed Utilization by Model Name",
+                        "styleSettings": {
+                          "margin": "0 0 20px 0"
+                        }
+                      },
+                      {
+                        "type": 10,
+                        "content": {
+                          "chartId": "workbook44a06433-82ec-44c1-8731-83e8a22cd995",
+                          "version": "MetricsItem/2.0",
+                          "size": 0,
+                          "chartType": 2,
+                          "resourceType": "microsoft.cognitiveservices/accounts",
+                          "metricScope": 0,
+                          "resourceParameter": "Resources",
+                          "resourceIds": [
+                            "{Resources}"
+                          ],
+                          "timeContextFromParameter": "TimeRange",
+                          "timeContext": {
+                            "durationMs": 2592000000
+                          },
+                          "metrics": [
+                            {
+                              "namespace": "microsoft.cognitiveservices/accounts",
+                              "metric": "microsoft.cognitiveservices/accounts-Azure OpenAI  Usage-AzureOpenAIProvisionedManagedUtilizationV2",
+                              "aggregation": 4,
+                              "splitBy": [
+                                "ModelVersion"
+                              ]
+                            }
+                          ],
+                          "title": "Provisioned-managed Utilization by Model Version",
+                          "showOpenInMe": true,
+                          "showCreateAlertRule": true,
+                          "gridSettings": {
+                            "formatters": [
+                              {
+                                "columnMatch": "Subscription",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "Name",
+                                "formatter": 13,
+                                "formatOptions": {
+                                  "linkTarget": "Resource"
+                                }
+                              },
+                              {
+                                "columnMatch": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests Timeline",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                                "formatter": 1,
+                                "numberFormat": {
+                                  "unit": 0,
+                                  "options": null
+                                }
+                              }
+                            ],
+                            "rowLimit": 10000,
+                            "labelSettings": [
+                              {
+                                "columnId": "Subscription",
+                                "label": "Subscription"
+                              },
+                              {
+                                "columnId": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                                "label": "Azure OpenAI Requests (Sum)"
+                              },
+                              {
+                                "columnId": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests Timeline",
+                                "label": "Azure OpenAI Requests Timeline"
+                              }
+                            ]
+                          }
+                        },
+                        "customWidth": "50",
+                        "showPin": false,
+                        "name": "Metric - Provisioned-managed Utilization by Model Version",
+                        "styleSettings": {
+                          "margin": "0 0 20px 0"
+                        }
+                      },
+                      {
+                        "type": 10,
+                        "content": {
+                          "chartId": "workbook44a06433-82ec-44c1-8731-83e8a22cd995",
+                          "version": "MetricsItem/2.0",
+                          "size": 0,
+                          "chartType": 2,
+                          "resourceType": "microsoft.cognitiveservices/accounts",
+                          "metricScope": 0,
+                          "resourceParameter": "Resources",
+                          "resourceIds": [
+                            "{Resources}"
+                          ],
+                          "timeContextFromParameter": "TimeRange",
+                          "timeContext": {
+                            "durationMs": 0
+                          },
+                          "metrics": [
+                            {
+                              "namespace": "microsoft.cognitiveservices/accounts",
+                              "metric": "microsoft.cognitiveservices/accounts-Azure OpenAI  Usage-AzureOpenAIProvisionedManagedUtilizationV2",
+                              "aggregation": 4,
+                              "splitBy": null
+                            }
+                          ],
+                          "title": "Provisioned-managed Utilization by Model Deployment ",
+                          "showOpenInMe": true,
+                          "showCreateAlertRule": true,
+                          "gridSettings": {
+                            "formatters": [
+                              {
+                                "columnMatch": "Subscription",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "Name",
+                                "formatter": 13,
+                                "formatOptions": {
+                                  "linkTarget": "Resource"
+                                }
+                              },
+                              {
+                                "columnMatch": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests Timeline",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                                "formatter": 1,
+                                "numberFormat": {
+                                  "unit": 0,
+                                  "options": null
+                                }
+                              }
+                            ],
+                            "rowLimit": 10000,
+                            "labelSettings": [
+                              {
+                                "columnId": "Subscription",
+                                "label": "Subscription"
+                              },
+                              {
+                                "columnId": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                                "label": "Azure OpenAI Requests (Sum)"
+                              },
+                              {
+                                "columnId": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests Timeline",
+                                "label": "Azure OpenAI Requests Timeline"
+                              }
+                            ]
+                          }
+                        },
+                        "customWidth": "50",
+                        "showPin": false,
+                        "name": "Metric - Provisioned-managed Utilization by Model Deployment ",
+                        "styleSettings": {
+                          "margin": "0 0 20px 0"
+                        }
+                      },
+                      {
+                        "type": 10,
+                        "content": {
+                          "chartId": "workbook44a06433-82ec-44c1-8731-83e8a22cd995",
+                          "version": "MetricsItem/2.0",
+                          "size": 0,
+                          "chartType": 2,
+                          "resourceType": "microsoft.cognitiveservices/accounts",
+                          "metricScope": 0,
+                          "resourceParameter": "Resources",
+                          "resourceIds": [
+                            "{Resources}"
+                          ],
+                          "timeContextFromParameter": "TimeRange",
+                          "timeContext": {
+                            "durationMs": 2592000000
+                          },
+                          "metrics": [
+                            {
+                              "namespace": "microsoft.cognitiveservices/accounts",
+                              "metric": "microsoft.cognitiveservices/accounts-Azure OpenAI  Usage-AzureOpenAIProvisionedManagedUtilizationV2",
+                              "aggregation": 4,
+                              "splitBy": [
+                                "StreamType"
+                              ]
+                            }
+                          ],
+                          "title": "Provisioned-managed Utilization by StreamType",
+                          "showOpenInMe": true,
+                          "showCreateAlertRule": true,
+                          "gridSettings": {
+                            "formatters": [
+                              {
+                                "columnMatch": "Subscription",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "Name",
+                                "formatter": 13,
+                                "formatOptions": {
+                                  "linkTarget": "Resource"
+                                }
+                              },
+                              {
+                                "columnMatch": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests Timeline",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                                "formatter": 1,
+                                "numberFormat": {
+                                  "unit": 0,
+                                  "options": null
+                                }
+                              }
+                            ],
+                            "rowLimit": 10000,
+                            "labelSettings": [
+                              {
+                                "columnId": "Subscription",
+                                "label": "Subscription"
+                              },
+                              {
+                                "columnId": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                                "label": "Azure OpenAI Requests (Sum)"
+                              },
+                              {
+                                "columnId": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests Timeline",
+                                "label": "Azure OpenAI Requests Timeline"
+                              }
+                            ]
+                          }
+                        },
+                        "customWidth": "50",
+                        "showPin": false,
+                        "name": "Metric - Provisioned-managed Utilization by StreamType",
+                        "styleSettings": {
+                          "margin": "0 0 20px 0"
+                        }
+                      }
+                    ]
+                  },
+                  "conditionalVisibility": {
+                    "parameterName": "monitorTab",
+                    "comparison": "isEqualTo",
+                    "value": "monitor-PTUUtilization"
+                  },
+                  "name": "group - Monitor - PTU Utilization"
+                },
+                {
+                  "type": 12,
+                  "content": {
+                    "version": "NotebookGroup/1.0",
+                    "groupType": "editable",
+                    "items": [
+                      {
+                        "type": 1,
+                        "content": {
+                          "json": "#### Metrics Description\r\n- **Processed FineTuned Training Hours**: Number of training hours processed on an OpenAI finetuned model.",
+                          "style": "upsell"
+                        },
+                        "name": "Monitor Title - Copy"
+                      },
+                      {
+                        "type": 10,
+                        "content": {
+                          "chartId": "workbook44a06433-82ec-44c1-8731-83e8a22cd995",
+                          "version": "MetricsItem/2.0",
+                          "size": 0,
+                          "chartType": 1,
+                          "resourceType": "microsoft.cognitiveservices/accounts",
+                          "metricScope": 0,
+                          "resourceParameter": "Resources",
+                          "resourceIds": [
+                            "{Resources}"
+                          ],
+                          "timeContextFromParameter": "TimeRange",
+                          "timeContext": {
+                            "durationMs": 2592000000
+                          },
+                          "metrics": [
+                            {
+                              "namespace": "microsoft.cognitiveservices/accounts",
+                              "metric": "microsoft.cognitiveservices/accounts-Azure OpenAI  Usage-FineTunedTrainingHours",
+                              "aggregation": 7,
+                              "splitBy": [
+                                "FeatureName"
+                              ]
+                            }
+                          ],
+                          "title": "Processed FineTuned Training Hours by Model Name",
+                          "showOpenInMe": true,
+                          "showCreateAlertRule": true,
+                          "gridSettings": {
+                            "formatters": [
+                              {
+                                "columnMatch": "Subscription",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "Name",
+                                "formatter": 13,
+                                "formatOptions": {
+                                  "linkTarget": "Resource"
+                                }
+                              },
+                              {
+                                "columnMatch": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests Timeline",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                                "formatter": 1,
+                                "numberFormat": {
+                                  "unit": 0,
+                                  "options": null
+                                }
+                              }
+                            ],
+                            "rowLimit": 10000,
+                            "labelSettings": [
+                              {
+                                "columnId": "Subscription",
+                                "label": "Subscription"
+                              },
+                              {
+                                "columnId": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                                "label": "Azure OpenAI Requests (Sum)"
+                              },
+                              {
+                                "columnId": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests Timeline",
+                                "label": "Azure OpenAI Requests Timeline"
+                              }
+                            ]
+                          }
+                        },
+                        "customWidth": "50",
+                        "showPin": false,
+                        "name": "Metric - Processed FineTuned Training Hours by Model Name",
+                        "styleSettings": {
+                          "margin": "0 0 20px 0"
+                        }
+                      },
+                      {
+                        "type": 10,
+                        "content": {
+                          "chartId": "workbook44a06433-82ec-44c1-8731-83e8a22cd995",
+                          "version": "MetricsItem/2.0",
+                          "size": 0,
+                          "chartType": 1,
+                          "resourceType": "microsoft.cognitiveservices/accounts",
+                          "metricScope": 0,
+                          "resourceParameter": "Resources",
+                          "resourceIds": [
+                            "{Resources}"
+                          ],
+                          "timeContextFromParameter": "TimeRange",
+                          "timeContext": {
+                            "durationMs": 2592000000
+                          },
+                          "metrics": [
+                            {
+                              "namespace": "microsoft.cognitiveservices/accounts",
+                              "metric": "microsoft.cognitiveservices/accounts-Azure OpenAI  Usage-FineTunedTrainingHours",
+                              "aggregation": 7,
+                              "splitBy": [
+                                "ModelDeploymentName"
+                              ]
+                            }
+                          ],
+                          "title": "Processed FineTuned Training Hours by Model Deployment Name",
+                          "showOpenInMe": true,
+                          "showCreateAlertRule": true,
+                          "gridSettings": {
+                            "formatters": [
+                              {
+                                "columnMatch": "Subscription",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "Name",
+                                "formatter": 13,
+                                "formatOptions": {
+                                  "linkTarget": "Resource"
+                                }
+                              },
+                              {
+                                "columnMatch": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests Timeline",
+                                "formatter": 5
+                              },
+                              {
+                                "columnMatch": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                                "formatter": 1,
+                                "numberFormat": {
+                                  "unit": 0,
+                                  "options": null
+                                }
+                              }
+                            ],
+                            "rowLimit": 10000,
+                            "labelSettings": [
+                              {
+                                "columnId": "Subscription",
+                                "label": "Subscription"
+                              },
+                              {
+                                "columnId": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests",
+                                "label": "Azure OpenAI Requests (Sum)"
+                              },
+                              {
+                                "columnId": "microsoft.cognitiveservices/accounts-Azure OpenAI  HTTP Requests-AzureOpenAIRequests Timeline",
+                                "label": "Azure OpenAI Requests Timeline"
+                              }
+                            ]
+                          }
+                        },
+                        "customWidth": "50",
+                        "showPin": false,
+                        "name": "Metric - Processed FineTuned Training Hours by Model Name",
+                        "styleSettings": {
+                          "margin": "0 0 20px 0"
+                        }
+                      }
+                    ]
+                  },
+                  "conditionalVisibility": {
+                    "parameterName": "monitorTab",
+                    "comparison": "isEqualTo",
+                    "value": "monitor-Finetuning"
+                  },
+                  "name": "group - Monitor - Fine-tuning"
+                }
+              ]
             },
-            "customWidth": "50",
-            "name": "query - Count by Location"
+            "conditionalVisibility": {
+              "parameterName": "selectedTab",
+              "comparison": "isEqualTo",
+              "value": "Monitor"
+            },
+            "name": "Monitor Group"
+          },
+          {
+            "type": 12,
+            "content": {
+              "version": "NotebookGroup/1.0",
+              "groupType": "editable",
+              "items": []
+            },
+            "conditionalVisibility": {
+              "parameterName": "selectedTab",
+              "comparison": "isEqualTo",
+              "value": "Overview"
+            },
+            "name": "Overview"
+          },
+          {
+            "type": 12,
+            "content": {
+              "version": "NotebookGroup/1.0",
+              "groupType": "editable",
+              "items": []
+            },
+            "conditionalVisibility": {
+              "parameterName": "selectedTab",
+              "comparison": "isEqualTo",
+              "value": "Insights"
+            },
+            "name": "Insights"
           }
         ]
       },
-      "name": "group - Monitor"
-    },
-    {
-      "type": 11,
-      "content": {
-        "version": "LinkItem/1.0",
-        "style": "tabs",
-        "links": [
-          {
-            "id": "ba4d84ad-9add-4c54-b570-e7285e6693f2",
-            "cellValue": "selectedTab",
-            "linkTarget": "parameter",
-            "linkLabel": "Overview",
-            "subTarget": "Overview",
-            "style": "link"
-          },
-          {
-            "id": "d302564e-a960-41a6-8b6e-0e9a2ac62b54",
-            "cellValue": "selectedTab",
-            "linkTarget": "parameter",
-            "linkLabel": "Monitor",
-            "subTarget": "Monitor",
-            "style": "link"
-          },
-          {
-            "id": "8cb52047-c43a-495b-ba83-a42dc2f1d106",
-            "cellValue": "selectedTab",
-            "linkTarget": "parameter",
-            "linkLabel": "Insights",
-            "subTarget": "Insights",
-            "style": "link"
-          }
-        ]
+      "conditionalVisibility": {
+        "parameterName": "Subscriptions",
+        "comparison": "isNotEqualTo",
+        "value": "not set"
       },
-      "name": "tabs"
-    },
-    {
-      "type": 3,
-      "content": {
-        "version": "KqlItem/1.0",
-        "query": "resources\r\n| where type == \"microsoft.cognitiveservices/accounts\"\r\n| where name in~ (split(\"{Resources:label}\", \", \"))\r\n| extend Details = pack_all()\r\n| project Resource=id, resourceGroup, location, subscriptionId, kind, SKU=sku.name, publicNetworkAccess=properties.publicNetworkAccess, privateEndpointConnections=properties.privateEndpointConnections, dateCreated=properties.dateCreated, tags, Details",
-        "size": 3,
-        "title": "Azure OpenAI Resources",
-        "showExportToExcel": true,
-        "exportToExcelOptions": "all",
-        "queryType": 1,
-        "resourceType": "microsoft.resourcegraph/resources",
-        "crossComponentResources": [
-          "{Resources}"
-        ],
-        "gridSettings": {
-          "rowLimit": 25,
-          "filter": true
-        }
-      },
-      "name": "query - Azure OpenAI Resources"
+      "name": "Workbook"
     }
   ],
   "fallbackResourceIds": [
